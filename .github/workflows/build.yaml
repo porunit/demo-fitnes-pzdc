@@ -31,7 +31,7 @@ jobs:
       - name: "🐳 Build & tag image"
         run: |
           docker build \
-            -f bot/Dockerfile \
+            -f Dockerfile \
             -t cr.yandex/$YCR_REGISTRY/misc/demo-fitness:${{ github.event.inputs.version }} \
             -t cr.yandex/$YCR_REGISTRY/misc/demo-fitness:latest \
             bot
