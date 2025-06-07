@@ -16,6 +16,7 @@ jobs:
     name: "🐳 Build & Push Image"
     runs-on: ubuntu-latest
     env:
+      VERSION: ${{ github.event.inputs.version }}
       YCR_REGISTRY: ${{ secrets.YCR_REGISTRY }}
       YC_SA_KEY_JSON: ${{ secrets.YC_SA_KEY_JSON }}
     steps:
@@ -32,11 +33,11 @@ jobs:
         run: |
           docker build \
             -f Dockerfile \
-            -t cr.yandex/$YCR_REGISTRY/misc/demo-fitness:${{ github.event.inputs.version }} \
+            -t cr.yandex/$YCR_REGISTRY/misc/demo-fitness:$VERSION \
             -t cr.yandex/$YCR_REGISTRY/misc/demo-fitness:latest \
             .
 
       - name: "🚀 Push image"
         run: |
-          docker push cr.yandex/$YCR_REGISTRY/misc/demo-fitness:${{ steps.vars.outputs.VERSION }}
+          docker push cr.yandex/$YCR_REGISTRY/misc/demo-fitness:$VERSION
           docker push cr.yandex/$YCR_REGISTRY/misc/demo-fitness:latest
