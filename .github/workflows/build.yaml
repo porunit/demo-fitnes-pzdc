@@ -34,7 +34,7 @@ jobs:
             -f Dockerfile \
             -t cr.yandex/$YCR_REGISTRY/misc/demo-fitness:${{ github.event.inputs.version }} \
             -t cr.yandex/$YCR_REGISTRY/misc/demo-fitness:latest \
-            bot
+            .
 
       - name: "🚀 Push image"
         run: |
