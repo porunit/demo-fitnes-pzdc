@@ -1,4 +1,4 @@
-package poruit.demofitnes;
+package poruit.demofitnes.data.dto;
 
 
 import lombok.AccessLevel;
