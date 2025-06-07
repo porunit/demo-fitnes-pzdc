@@ -38,5 +38,5 @@ jobs:
 
       - name: "🚀 Push image"
         run: |
-          docker push cr.yandex/$YCR_REGISTRY/agromant:${{ steps.vars.outputs.VERSION }}
-          docker push cr.yandex/$YCR_REGISTRY/agromant:latest
+          docker push cr.yandex/$YCR_REGISTRY/misc/demo-fitness:${{ steps.vars.outputs.VERSION }}
+          docker push cr.yandex/$YCR_REGISTRY/misc/demo-fitness:latest
