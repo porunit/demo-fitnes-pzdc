@@ -15,7 +15,6 @@ jobs:
   build-push:
     name: "🐳 Build & Push Image"
     runs-on: ubuntu-latest
-    needs: python-test
     env:
       YCR_REGISTRY: ${{ secrets.YCR_REGISTRY }}
       YC_SA_KEY_JSON: ${{ secrets.YC_SA_KEY_JSON }}
