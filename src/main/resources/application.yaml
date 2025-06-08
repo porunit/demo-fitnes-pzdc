@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: demo-fitness
+  data:
+    mongodb:
+      host: ${MONGO_HOST}
+      port: ${MONGO_PORT}
+      database: ${MONGO_DATABASE}
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
+      cert-path: ${MONGO_CERT_PATH}
+server:
+  port: 8080

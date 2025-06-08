@@ -1,0 +1,43 @@
+name: "🚀 Build & Deploy"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to tag the image with"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build-push:
+    name: "🐳 Build & Push Image"
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event.inputs.version }}
+      YCR_REGISTRY: ${{ secrets.YCR_REGISTRY }}
+      YC_SA_KEY_JSON: ${{ secrets.YC_SA_KEY_JSON }}
+    steps:
+      - name: "📥 Checkout code"
+        uses: actions/checkout@v4
+
+      - name: "🔧 Set up Docker Buildx"
+        uses: docker/setup-buildx-action@v3
+
+      - name: "🔑 Login to YCR with service account"
+        run: echo "$YC_SA_KEY_JSON" | docker login --username json_key --password-stdin cr.yandex
+
+      - name: "🐳 Build & tag image"
+        run: |
+          docker build \
+            -f Dockerfile \
+            -t cr.yandex/$YCR_REGISTRY/misc/demo-fitness:$VERSION \
+            -t cr.yandex/$YCR_REGISTRY/misc/demo-fitness:latest \
+            .
+
+      - name: "🚀 Push image"
+        run: |
+          docker push cr.yandex/$YCR_REGISTRY/misc/demo-fitness:$VERSION
+          docker push cr.yandex/$YCR_REGISTRY/misc/demo-fitness:latest
